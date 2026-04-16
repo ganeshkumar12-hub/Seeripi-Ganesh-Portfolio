@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seeripi Ganesh Kumar — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0eeff;
+    --muted: #8b89a8;
+    --accent: #7c6af5;
+    --accent2: #a594f9;
+    --accent3: #2dd4bf;
+    --accent4: #f472b6;
+    --glow: rgba(124,106,245,0.15);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2.5rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo { font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent2); font-family: 'DM Mono', monospace; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; left: -10%;
+    width: 70vw; height: 70vw;
+    background: radial-gradient(circle, rgba(124,106,245,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 0; right: -5%;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(45,212,191,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--accent3);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent3); }
+  .hero-name {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-title {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+  .hero-desc {
+    font-size: 15px; color: var(--muted);
+    max-width: 520px; line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: all 0.2s;
+    font-family: 'Syne', sans-serif;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-outline { background: transparent; border: 0.5px solid var(--border2); color: var(--text); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-score {
+    position: absolute; right: 2.5rem; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.5rem;
+  }
+  .score-ring {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+  .score-ring::before {
+    content: '';
+    position: absolute; inset: 6px;
+    border-radius: 50%;
+    background: var(--surface);
+  }
+  .score-val { font-size: 28px; font-weight: 800; color: var(--accent2); position: relative; z-index: 1; }
+  .score-label { font-size: 11px; color: var(--muted); position: relative; z-index: 1; font-family: 'DM Mono', monospace; }
+  section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 3rem; }
+  .section-num { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent3); letter-spacing: 0.15em; }
+  .section-title { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+  .section-line { flex: 1; height: 0.5px; background: var(--border); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+  .skill-chip {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 13px; font-weight: 500;
+    text-align: center;
+    transition: all 0.2s; cursor: default;
+  }
+  .skill-chip:hover { border-color: var(--accent); color: var(--accent2); transform: translateY(-2px); }
+  .skill-chip.highlight { border-color: rgba(124,106,245,0.3); background: rgba(124,106,245,0.08); color: var(--accent2); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .project-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 1rem;
+    border: 0.5px solid var(--border);
+  }
+  .project-title { font-size: 16px; font-weight: 700; margin-bottom: 0.5rem; }
+  .project-period { font-size: 11px; color: var(--accent3); font-family: 'DM Mono', monospace; margin-bottom: 0.75rem; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 20px;
+    background: rgba(124,106,245,0.1);
+    border: 0.5px solid rgba(124,106,245,0.25);
+    color: var(--accent2);
+    font-family: 'DM Mono', monospace;
+  }
+  .tag.teal { background: rgba(45,212,191,0.1); border-color: rgba(45,212,191,0.25); color: var(--accent3); }
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item { display: grid; grid-template-columns: 160px 1px 1fr; gap: 0 2rem; padding-bottom: 2.5rem; }
+  .timeline-date { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); padding-top: 0.15rem; text-align: right; }
+  .timeline-line { width: 1px; background: var(--border); position: relative; margin: 0 auto; }
+  .timeline-line::before {
+    content: '';
+    position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 8px;
+    border-radius: 50%; background: var(--accent);
+  }
+  .timeline-role { font-size: 16px; font-weight: 700; margin-bottom: 0.25rem; }
+  .timeline-org { font-size: 13px; color: var(--accent2); margin-bottom: 0.5rem; }
+  .timeline-detail { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .cert-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    transition: all 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent3); }
+  .cert-icon {
+    width: 32px; height: 32px; flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(45,212,191,0.12);
+    border: 0.5px solid rgba(45,212,191,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .cert-name { font-size: 13px; font-weight: 600; line-height: 1.4; color: var(--text); }
+  .contact-box {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .contact-box::before {
+    content: '';
+    position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(circle, rgba(124,106,245,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .contact-headline { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.03em; }
+  .contact-sub { font-size: 15px; color: var(--muted); margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    border: 0.5px solid var(--border2);
+    border-radius: 8px;
+    font-size: 13px; color: var(--text);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    transition: all 0.2s;
+    background: var(--surface2);
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent2); }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 0.5px solid var(--border);
+    font-family: 'DM Mono', monospace;
+  }
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.25rem; }
+    .hero { padding: 7rem 1.25rem 3rem; }
+    .hero-score { display: none; }
+    section { padding: 4rem 1.25rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .timeline-line { display: none; }
+    .timeline-date { text-align: left; }
+    .contact-box { padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SGK</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-tag">Available for opportunities</div>
+  <h1 class="hero-name">Seeripi<br><span>Ganesh Kumar</span></h1>
+  <p class="hero-title">Software Developer & Data Analyst</p>
+  <p class="hero-desc">Final year Information Science student at RNS Institute of Technology. Building data-driven applications with a focus on machine learning, deep learning, and intuitive interfaces.</p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="hero-score">
+    <div class="score-ring">
+      <span class="score-val">8.8</span>
+      <span class="score-label">CGPA</span>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills" style="max-width: 1100px; margin: 0 auto; padding: 4rem 2.5rem 3rem;">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-chip highlight">Python</div>
+    <div class="skill-chip highlight">Java</div>
+    <div class="skill-chip highlight">Machine Learning</div>
+    <div class="skill-chip highlight">Deep Learning</div>
+    <div class="skill-chip">SQL</div>
+    <div class="skill-chip">MongoDB</div>
+    <div class="skill-chip">HTML / CSS</div>
+    <div class="skill-chip">GitHub</div>
+    <div class="skill-chip">Data Analysis</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon">🧵</div>
+      <div class="project-title">TexFusion</div>
+      <div class="project-period">Oct 2025 – Jan 2026</div>
+      <p class="project-desc">AI-powered textile quality inspection and design generation system. CNN-based defect detection using TensorFlow with image preprocessing and feature extraction to improve classification accuracy.</p>
+      <div class="project-tags">
+        <span class="tag">CNN</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Deep Learning</span>
+        <span class="tag teal">Computer Vision</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📈</div>
+      <div class="project-title">Retail Demand Forecasting</div>
+      <div class="project-period">May 2025 – Jul 2025</div>
+      <p class="project-desc">Regression models to forecast weekly retail sales. Exploratory data analysis with a Streamlit dashboard for visualization and real-time predictions using Scikit-learn and Pandas.</p>
+      <div class="project-tags">
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag teal">Regression</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🎙️</div>
+      <div class="project-title">Speech Emotion Recognition</div>
+      <div class="project-period">Aug 2024 – Sep 2024</div>
+      <p class="project-desc">CNN/RNN-based emotion recognition system using MFCC features on the RAVDESS dataset. Deployed via Streamlit for real-time emotion classification from audio input.</p>
+      <div class="project-tags">
+        <span class="tag">CNN/RNN</span>
+        <span class="tag">MFCC</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag teal">Deep Learning</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE & EDUCATION -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Experience & Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Feb 2026 – Present</div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Android App Developer (Gen AI)</div>
+        <div class="timeline-org">MindMatrixEd · Bengaluru, India</div>
+        <div class="timeline-detail">Building Android applications leveraging Generative AI capabilities. Internship role focusing on integrating modern AI features into mobile education products.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Dec 2022 – May 2026</div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">B.E. Information Science & Engineering</div>
+        <div class="timeline-org">RNS Institute of Technology · Bengaluru</div>
+        <div class="timeline-detail">CGPA 8.8. Focused on machine learning, data analytics, and software development across core and elective coursework.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Mar 2020 – Mar 2022</div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Intermediate (Class XII)</div>
+        <div class="timeline-org">Sri Chaitanya College of Education · Andhra Pradesh</div>
+        <div class="timeline-detail">Scored 88% in Andhra Pradesh Board examinations.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs" style="padding-top: 0;">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🐍</div>
+      <div class="cert-name">Programming Fundamentals using Python (Part 1 & 2)</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">☕</div>
+      <div class="cert-name">Java Certification</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🗄️</div>
+      <div class="cert-name">Database Management System (Part 1)</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📊</div>
+      <div class="cert-name">SQL Basics Certificate</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <div class="cert-name">Cisco Data Analytics Essentials</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box">
+    <div class="contact-headline">Let's connect</div>
+    <p class="contact-sub">Open to full-time roles and internships in Software Development & Data Analytics.</p>
+    <div class="contact-links">
+      <a href="mailto:seeripi.ganeshkumar@gmail.com" class="contact-link">✉ seeripi.ganeshkumar@gmail.com</a>
+      <a href="https://www.linkedin.com/in/seeripi-ganesh-kumar" target="_blank" class="contact-link">in LinkedIn</a>
+      <a href="tel:+917989393700" class="contact-link">📞 +91 79893 93700</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed & built — Seeripi Ganesh Kumar · Bengaluru, India · 2026
+</footer>
+
+</body>
+</html>
