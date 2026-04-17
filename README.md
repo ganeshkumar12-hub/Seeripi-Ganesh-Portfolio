@@ -39,7 +39,7 @@ I am a 8th semester student passionate about software development, data structur
 ## 📫 Contact Me
 - 📧 Email: seeripi.ganeshkumar@gmail.com
 - 🔗 LinkedIn: www.linkedin.com/in/seeripi-ganesh-kumar
-- 💻 GitHub: https://github.com/ganeshkumarhub-12
+- 💻 GitHub: https://github.com/ganeshkumar12-hub
 
 ---
 
