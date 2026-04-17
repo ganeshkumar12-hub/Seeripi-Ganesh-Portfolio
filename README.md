@@ -10,7 +10,7 @@ I am a 8th semester student passionate about software development, data structur
 ---
 
 ## 🛠️ Skills
-- **Languages:** HTML, CSS, JavaScript, Java  
+- **Languages:** HTML, CSS, JavaScript, Java, SQL  
 - **Core Concepts:** Data Structures & Algorithms, DBMS  
 - **Tools:** Git, GitHub  
 
